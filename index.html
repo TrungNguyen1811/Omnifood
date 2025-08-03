@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Omnifood</title>
+
+    <!-- Always include this line of code!!! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -12,6 +15,7 @@
     />
 
     <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/select-custome.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
 
@@ -23,6 +27,10 @@
       nomodule=""
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <script src="script.js" defer></script>
 
     <title>Omnifood</title>
   </head>
@@ -31,23 +39,25 @@
       <a href="#">
         <img class="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
       </a>
+
       <nav class="main-nav">
         <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="#">How it works</a></li>
-          <li><a class="main-nav-link" href="#">Meals</a></li>
-          <li><a class="main-nav-link" href="#">Testimonials</a></li>
-          <li><a class="main-nav-link" href="#">Pricing</a></li>
-          <li><a class="main-nav-link nav-cta" href="#">Try for free</a></li>
+          <li><a class="main-nav-link" href="#section-how">How it works</a></li>
+          <li><a class="main-nav-link" href="#section-meals">Meals</a></li>
+          <li><a class="main-nav-link" href="#section-testimonials">Testimonials</a></li>
+          <li><a class="main-nav-link" href="#section-pricing">Pricing</a></li>
+          <li><a class="main-nav-link nav-cta" href="#section-cta">Try for free</a></li>
         </ul>
       </nav>
-      <button class='btn-mobile-nav'> 
-        <ion-icon class='icon-mobile-nav' name="menu-outline"></ion-icon>
-        <ion-icon class='icon-mobile-nav' name="close-outline"></ion-icon>
+
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
       </button>
     </header>
 
     <main>
-      <section class="section-hero">
+      <section class="section-hero" id='section-hero'>
         <div class="hero">
           <div class="hero-text-box">
             <h1 class="heading-primary">
@@ -61,7 +71,7 @@
             <a href="#" class="btn btn--full margin-right-sm"
               >Start eating well</a
             >
-            <a href="#" class="btn btn--outline">Learn more &darr;</a>
+            <a href="#section-how" class="btn btn--outline">Learn more <ion-icon name="arrow-down-outline" class='arrow-down-outline'></ion-icon></a>
             <div class="delivered-meals">
               <div class="delivered-imgs">
                 <img src="img/customers/customer-1.jpg" alt="Customer photo" />
@@ -72,7 +82,7 @@
                 <img src="img/customers/customer-6.jpg" alt="Customer photo" />
               </div>
               <p class="delivered-text">
-                <span>250,000+</span> meals delivered last year!
+                <span class='counter' data-target='250000'>220,000+</span> meals delivered last year!
               </p>
             </div>
           </div>
@@ -105,7 +115,7 @@
         </div>
       </section>
 
-      <section class="section-how">
+      <section class="section-how" id='section-how'>
         <div class="container">
           <span class="subheading">How it works</span>
           <h2 class="heading-secondary">
@@ -127,6 +137,7 @@
               matter what diet you follow!
             </p>
           </div>
+
           <div class="step-img-box">
             <img
               src="img/app/app-screen-1.png"
@@ -176,7 +187,7 @@
         </div>
       </section>
 
-      <section class="section-meals">
+      <section class="section-meals" id='section-meals'>
         <div class="container center-text">
           <span class="subheading">Meals</span>
           <h2 class="heading-secondary">
@@ -296,7 +307,7 @@
         </div>
       </section>
 
-      <section class="section-testimonials">
+      <section class="section-testimonials" id='section-testimonials'>
         <div class="testimonials-container">
           <span class="subheading">Testimonials</span>
           <h2 class="heading-secondary">Once you try it, you can't go back</h2>
@@ -445,7 +456,7 @@
         </div>
       </section>
 
-      <section class="section-pricing">
+      <section class="section-pricing" id='section-pricing'>
         <div class="container">
           <span class="subheading">Pricing</span>
           <h2 class="heading-secondary">
@@ -475,6 +486,7 @@
               </li>
               <li class="list-item">
                 <ion-icon class="list-icon" name="close-outline"></ion-icon>
+                <span>Get access to latest recipes</span>
               </li>
             </ul>
             <div class="plan-sing-up">
@@ -555,7 +567,7 @@
         </div>
       </section>
 
-      <section class="section-cta">
+      <section class="section-cta" id='section-cta'>
         <div class="container">
           <div class="cta">
             <div class="cta-text-box">
@@ -587,15 +599,16 @@
                   />
                 </div>
 
-                <div>
+                <div class='custom-select'>
                   <label for="select-where">Where did you hear from us?</label>
                   <select id="select-where" required>
-                    <option value="">Please choose one option:</option>
-                    <option value="friends">Friends and family</option>
-                    <option value="youtube">YouTube video</option>
-                    <option value="podcast">Podcast</option>
-                    <option value="ad">Facebook ad</option>
-                    <option value="others">Others</option>
+  
+                    <option value=""><span>Please choose one option:</span></option>
+                    <option value="friends"><span class="option-label">Friends and family</span></option>
+                    <option value="youtube"><span class="option-label">YouTube video</span></option>
+                    <option value="podcast"><span class="option-label">Podcast</span></option>
+                    <option value="ad"><span class="option-label">Facebook ad</span></option>
+                    <option value="others"><span class="option-label">Others</span></option>
                   </select>
                 </div>
 
@@ -644,6 +657,7 @@
             Copyright &copy; 2027 by Omnifood, Inc. All rights reserved.
           </p>
         </div>
+
         <div class="address-col">
           <p class="footer-heading">Contact us</p>
           <address class="contacts">
@@ -659,6 +673,7 @@
             </p>
           </address>
         </div>
+
         <nav class="nav-col">
           <p class="footer-heading">Account</p>
           <ul class="footer-nav">
