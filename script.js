@@ -1,11 +1,17 @@
 const btnMenu = document.querySelector('.btn-mobile-nav')
 const header = document.querySelector('.header')
+const btnNav = document.querySelectorAll('.main-nav-link')
 
 // Click show nav-bar mobile
 btnMenu.addEventListener('click', () => {
   header.classList.toggle('nav-open')
 })
-
+// Click turn off nav-bar mobile
+btnNav.forEach((link) => {
+  link.addEventListener('click', () => {
+    header.classList.remove('nav-open')
+  })
+})
 // click to scroll to section
 function getSamePageAnchor(link) {
   if (
